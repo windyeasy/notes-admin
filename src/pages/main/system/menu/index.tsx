@@ -6,7 +6,7 @@ import { WBaseTable, WBaseTableProps, useWtbGetData } from '@/base-ui/wtb'
 import PageModal, { OnModalSubmitType } from '@/base-ui/page-modal'
 import { modalConfig } from './config/modal.config'
 import { usePageModal } from '@/base-ui/page-modal/hooks/usePageModal'
-import { addMenu, editMenu } from './service'
+import { addMenu, editMenu, removeMenu } from './service'
 import { useMessageApi } from '@/utils/global-ant-proxy'
 
 interface IProps {
@@ -78,7 +78,10 @@ const Menu: FC<IProps> = () => {
               description: '是否确认删除当前数据?'
             },
             click: (record) => {
-              console.log(record)
+              removeMenu(record.id).then(() => {
+                fetchPageList()
+                useMessageApi()?.success('删除成功！')
+              })
             },
             text: '删除'
           }

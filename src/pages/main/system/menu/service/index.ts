@@ -14,3 +14,9 @@ export function editMenu(id: number, payload: any) {
     data: payload
   })
 }
+// 删除菜单
+export function removeMenu(id: number) {
+  return request.delete({
+    url: '/menu/' + id
+  })
+}
