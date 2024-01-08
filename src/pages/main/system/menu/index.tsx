@@ -74,8 +74,8 @@ const Menu: FC<IProps> = () => {
             type: 'primary',
             danger: true,
             popConfirmProps: {
-              title: '删除用户',
-              description: '是否确认删除当前用户?'
+              title: '删除菜单',
+              description: '是否确认删除当前数据?'
             },
             click: (record) => {
               console.log(record)
