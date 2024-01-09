@@ -23,6 +23,11 @@ export class WFormProxyService {
       this.formData = undefined
     }
   }
+  /**
+   * 通过这个方法可以为表单设置初始值，
+   *  比如编辑是获取到数据后可以将值设置到表单上
+   * @param info 表单信息值
+   */
   execFieldsValueByData(info: any) {
     if (this.setFieldsValueByDataState === 'pending') {
       this.formData = info

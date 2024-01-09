@@ -6,6 +6,7 @@ import { searchConfig } from './config/search.config'
 import { WBaseTable, WBaseTableProps, useWtbGetData } from '@/base-ui/wtb'
 import { removeArticle } from './service'
 import { useMessageApi } from '@/utils/global-ant-proxy'
+import { useNavigate } from 'react-router-dom'
 
 interface IProps {
   children?: ReactNode
@@ -13,6 +14,7 @@ interface IProps {
 
 const NoteList: FC<IProps> = () => {
   const { fetchPageList, changeSearchInfo } = useWtbGetData()
+  const navigate = useNavigate()
   const tableConfig: WBaseTableProps = {
     api: '/note/list',
     tableConfig: {
@@ -99,6 +101,11 @@ const NoteList: FC<IProps> = () => {
   const searchSubmit = (values: any) => {
     changeSearchInfo(values)
   }
+  // 添加按钮点击
+  const addClick = () => {
+    // 跳转到编辑页面
+    navigate('/main/note/list/add-edit')
+  }
   return (
     <>
       <PageMainContent
@@ -107,6 +114,7 @@ const NoteList: FC<IProps> = () => {
         }
         tableContent={<WBaseTable {...tableConfig} />}
         headerInfo={{ title: '文章列表', btnTitle: '文章添加' }}
+        onAddClick={addClick}
       />
     </>
   )

@@ -52,24 +52,13 @@ export const extendFormItems: NewExtendFormItem[] = [
     type: 'select',
     render: (item) => {
       const [options, setOptions] = useState(item.options || [])
-
       useEffect(() => {
-        if (item.asyncOptions) {
+        if (item.asyncOptions && !item.options) {
           item.asyncOptions().then((options: any) => {
             setOptions(options)
           })
-        } else {
-          // 当是page-modal里面处理异步数据时，这里需要监听数据变化
-          Object.defineProperty(item, 'options', {
-            set() {
-              if (item.options && checkArrayNotEmpty(item.options)) {
-                const options = [...item.options]
-                setOptions(options)
-              }
-            }
-          })
         }
-      }, [item.asyncOptions])
+      }, [])
       return (
         <Form.Item
           label={item.label}
