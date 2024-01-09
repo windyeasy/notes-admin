@@ -3,13 +3,16 @@ import PageMainContent from '@/components/page-main-content'
 import React, { memo } from 'react'
 import type { FC, ReactNode } from 'react'
 import { searchConfig } from './config/search.config'
-import { WBaseTable, WBaseTableProps } from '@/base-ui/wtb'
+import { WBaseTable, WBaseTableProps, useWtbGetData } from '@/base-ui/wtb'
+import { removeArticle } from './service'
+import { useMessageApi } from '@/utils/global-ant-proxy'
 
 interface IProps {
   children?: ReactNode
 }
 
 const NoteList: FC<IProps> = () => {
+  const { fetchPageList, changeSearchInfo } = useWtbGetData()
   const tableConfig: WBaseTableProps = {
     api: '/note/list',
     tableConfig: {
@@ -81,7 +84,10 @@ const NoteList: FC<IProps> = () => {
               description: '是否确认删除当前文章?'
             },
             click: (record) => {
-              console.log(record)
+              removeArticle(record.id).then(() => {
+                fetchPageList()
+                useMessageApi()?.success('删除文章成功！')
+              })
             },
             text: '删除'
           }
@@ -89,10 +95,16 @@ const NoteList: FC<IProps> = () => {
       }
     ]
   }
+  // 文章列表搜索功能
+  const searchSubmit = (values: any) => {
+    changeSearchInfo(values)
+  }
   return (
     <>
       <PageMainContent
-        searchContent={<SearchForm formname="noteSearchForm" formItems={searchConfig} />}
+        searchContent={
+          <SearchForm formname="noteSearchForm" formItems={searchConfig} onSubmit={searchSubmit} />
+        }
         tableContent={<WBaseTable {...tableConfig} />}
         headerInfo={{ title: '文章列表', btnTitle: '文章添加' }}
       />
