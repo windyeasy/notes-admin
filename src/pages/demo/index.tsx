@@ -1,20 +1,25 @@
 import React, { memo } from 'react'
 import type { FC, ReactNode } from 'react'
 import { DemoWrapper } from './style'
-import screenfull from 'screenfull'
+// import UploadFile from '@/base-ui/upload-file'
+import MDEditor from '@uiw/react-md-editor'
 interface IProps {
   children?: ReactNode
 }
 
 const Demo: FC<IProps> = () => {
-  function btnClick() {
-    screenfull.toggle()
-    // if (screenfull.isEnabled) {
-    // }
-  }
+  const [value, setValue] = React.useState('**Hello world!!!**')
   return (
     <DemoWrapper>
-      <button onClick={btnClick}>全屏</button>
+      <MDEditor
+        value={value}
+        onChange={(value) => {
+          if (typeof value === 'string') {
+            setValue(value)
+          }
+        }}
+      />
+      {/* <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} /> */}
     </DemoWrapper>
   )
 }

@@ -47,6 +47,8 @@ export interface WFormItem<T = string> {
   checkable?: boolean
   // 跟踪字段变化修改值
   followFieldsChangeModifyValue?: FollowFieldsChangeModifyValueType[]
+  // 设置高度
+  height?: string | number
   [key: string]: any // 添加使用别的类型进行扩展
 }
 

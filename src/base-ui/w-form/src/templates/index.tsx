@@ -14,6 +14,8 @@ import type { ExtendFormItem } from '../type'
 import type { WBaseFormItem } from '..'
 import FormTree from '../components/form-tree'
 import { checkArrayNotEmpty } from '@/utils/checkValue'
+import UploadFile from '@/base-ui/upload-file'
+import MDEditor from '@uiw/react-md-editor'
 
 export type WFormItemType =
   | 'input'
@@ -27,6 +29,8 @@ export type WFormItemType =
   | 'tree-select'
   | 'tree'
   | 'radio-group'
+  | 'upload-file'
+  | 'mardown-editor'
   | 'custom'
 type NewExtendFormItem = ExtendFormItem<WBaseFormItem>
 
@@ -293,6 +297,38 @@ export const extendFormItems: NewExtendFormItem[] = [
               )
             })}
           </Radio.Group>
+        </Form.Item>
+      )
+    }
+  },
+  {
+    type: 'upload-file',
+    render: (item) => {
+      return (
+        <Form.Item
+          label={item.label}
+          name={item.prop}
+          labelCol={item.labelCol}
+          wrapperCol={item.wrapperCol}
+          rules={item.rules}
+        >
+          <UploadFile />
+        </Form.Item>
+      )
+    }
+  },
+  {
+    type: 'markdown-editor',
+    render: (item) => {
+      return (
+        <Form.Item
+          label={item.label}
+          name={item.prop}
+          labelCol={item.labelCol}
+          wrapperCol={item.wrapperCol}
+          rules={item.rules}
+        >
+          <MDEditor height={item.height} />
         </Form.Item>
       )
     }

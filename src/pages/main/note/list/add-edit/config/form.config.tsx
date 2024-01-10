@@ -40,12 +40,22 @@ export const FormConfig: WBaseFormProps = {
       wrapperCol: { span: 10 }
     },
     {
-      type: 'textarea',
-      label: '菜单内容',
-      defaultValueUn: true,
+      type: 'upload-file',
+      label: '内容文件',
+      prop: 'fileId',
       labelCol: { span: 2 },
+      wrapperCol: { span: 10 },
+      visibleIf: {
+        hidden: { type: 2 }
+      }
+    },
+    {
+      type: 'markdown-editor',
+      label: '菜单内容',
+      labelCol: { span: 2 },
+      wrapperCol: { span: 24 },
       prop: 'content',
-      placehold: '请输入菜单内容',
+      height: '700px',
       visibleIf: {
         hidden: { type: 1 }
       }
