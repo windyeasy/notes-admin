@@ -304,6 +304,10 @@ export const extendFormItems: NewExtendFormItem[] = [
   {
     type: 'upload-file',
     render: (item) => {
+      /**
+       * 这里需要得到额外数据，
+       * 数据通过设置近来在
+       */
       return (
         <Form.Item
           label={item.label}

@@ -2,6 +2,7 @@ import axios from 'axios'
 import type { AxiosInstance } from 'axios'
 
 import type { RequestConfig, RequestConstructorConfig } from './type'
+
 class Request {
   instance: AxiosInstance
   constructor(config: RequestConstructorConfig) {
@@ -43,7 +44,7 @@ class Request {
       config = config.interceptors.requestSuccessFn(config)
     }
 
-    return new Promise<T>((reslove) => {
+    return new Promise<T>((reslove, reject) => {
       this.instance
         .request<any, T>(config)
         .then((res) => {
@@ -53,7 +54,7 @@ class Request {
           reslove(res)
         })
         .catch((err: string) => {
-          console.error('请求出错: ', err)
+          reject(err)
         })
     })
   }

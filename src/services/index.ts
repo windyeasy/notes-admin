@@ -29,8 +29,6 @@ const request = new Request({
       }
       if (res.data.code != 0) {
         useMessageApi()?.error(res.data.message)
-        // 抛出错误，可以实现在成功获取数据时不需要res.code==0判断
-        throw Error('请求数据不成功！')
       }
       return res.data
     }
