@@ -30,6 +30,7 @@ const PanelAccount: FC<IProps> = (props) => {
       <Form
         size="large"
         name="account-form"
+        labelWrap
         initialValues={{ username: 'superadmin', password: '123456' }}
         onFinish={handleFinish}
       >
