@@ -7,6 +7,7 @@ import type { TypedUseSelectorHook } from 'react-redux'
 import wtbReducer from '@/base-ui/wtb/src/store'
 import pageModalReducer from '@/base-ui/page-modal/store'
 import themeReducer from './theme'
+import wFormReducer from '@/base-ui/w-form/src/store'
 
 const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
     menu: menuReducer,
     wtb: wtbReducer,
     pageModal: pageModalReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    wForm: wFormReducer
   }
 })
 

@@ -3,7 +3,7 @@ import React, { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import { FormConfig } from './config/form.config'
 import { Button, Card, Row } from 'antd'
-import { AddEditWrapper } from './style'
+import { AddWrapper } from './style'
 import { newArticle } from '../service'
 import { useMessageApi } from '@/utils/global-ant-proxy'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +12,7 @@ interface IProps {
   children?: ReactNode
 }
 
-const AddEdit: FC<IProps> = () => {
+const Add: FC<IProps> = () => {
   const { formProxyService } = useWForm()
   const navigate = useNavigate()
   useEffect(() => {
@@ -39,7 +39,7 @@ const AddEdit: FC<IProps> = () => {
       })
   }
   return (
-    <AddEditWrapper>
+    <AddWrapper>
       <div className="header">
         <div className="header-title">文章添加</div>
       </div>
@@ -52,8 +52,8 @@ const AddEdit: FC<IProps> = () => {
           </Button>
         </Row>
       </Card>
-    </AddEditWrapper>
+    </AddWrapper>
   )
 }
 
-export default memo(AddEdit)
+export default memo(Add)

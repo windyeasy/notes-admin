@@ -74,7 +74,7 @@ const NoteList: FC<IProps> = () => {
           {
             type: 'primary',
             click: (record) => {
-              console.log(record)
+              navigate(`/main/note/list/edit/${record.id}`)
             },
             text: '编辑'
           },
@@ -103,8 +103,8 @@ const NoteList: FC<IProps> = () => {
   }
   // 添加按钮点击
   const addClick = () => {
-    // 跳转到编辑页面
-    navigate('/main/note/list/add-edit')
+    // 跳转到添加页面
+    navigate('/main/note/list/add')
   }
   return (
     <>

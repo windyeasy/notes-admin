@@ -7,7 +7,8 @@ const Login = lazy(() => import('@/pages/login'))
 const Main = lazy(() => import('@/pages/main'))
 const NotFound = lazy(() => import('@/pages/not-found'))
 
-const AddEdit = lazy(() => import('@/pages/main/note/list/add-edit/index'))
+const Add = lazy(() => import('@/pages/main/note/list/add/index'))
+const NoteEdit = lazy(() => import('@/pages/main/note/list/edit/index'))
 const routes: RouteObject[] = [
   {
     path: '/',
@@ -18,8 +19,12 @@ const routes: RouteObject[] = [
     element: <Main />,
     children: [
       {
-        path: '/main/note/list/add-edit',
-        element: <AddEdit />
+        path: '/main/note/list/add',
+        element: <Add />
+      },
+      {
+        path: '/main/note/list/edit/:id',
+        element: <NoteEdit />
       },
       {
         path: '/main/*',

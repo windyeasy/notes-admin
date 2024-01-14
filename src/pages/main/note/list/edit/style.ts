@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const AddEditWrapper = styled.div`
+export const EditWrapper = styled.div`
   .header {
     background-color: #fff;
     padding: 20px;
