@@ -48,3 +48,10 @@ export function uploadFile(file: UploadFileConfig['file']) {
     name: 'file'
   })
 }
+
+export function editUserPassword(id: number, payload: { password: string }) {
+  return request.patch({
+    url: `/user/modify-password/${id}`,
+    data: payload
+  })
+}

@@ -10,6 +10,7 @@ import { useMessageApi } from '@/utils/global-ant-proxy'
 import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons'
 import screenfull from 'screenfull'
 import avatarSvg from '@/assets/img/user-avatar-fill.svg'
+import ModifyPasswordModal from './modify-password-modal'
 interface IProps {
   children?: ReactNode
 }
@@ -21,6 +22,7 @@ const CrumbRight: FC<IProps> = () => {
     }),
     shallowEqual
   )
+  const [isOpen, setIsOpen] = useState(false)
   const [isScreenFull, setIsScreenFull] = useState(false)
   function loginOut() {
     logOff()
@@ -31,6 +33,10 @@ const CrumbRight: FC<IProps> = () => {
     {
       key: '1',
       label: <a onClick={loginOut}>退出登录</a>
+    },
+    {
+      key: '2',
+      label: <a onClick={() => setIsOpen(true)}>修改用户密码</a>
     }
   ]
   function toggleScreenFull() {
@@ -51,6 +57,7 @@ const CrumbRight: FC<IProps> = () => {
           <span className="user-name">{userInfo.username}</span>
         </a>
       </Dropdown>
+      <ModifyPasswordModal show={isOpen} onClose={() => setIsOpen(false)} />
     </CrumbRightWrapper>
   )
 }
