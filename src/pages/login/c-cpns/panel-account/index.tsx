@@ -31,7 +31,7 @@ const PanelAccount: FC<IProps> = (props) => {
         size="large"
         name="account-form"
         labelWrap
-        initialValues={{ username: 'superadmin', password: '123456' }}
+        initialValues={{ username: '', password: '' }}
         onFinish={handleFinish}
       >
         <FormItem name="username" rules={[{ required: true, message: '请输入用户名!' }]}>
