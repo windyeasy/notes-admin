@@ -3,9 +3,16 @@ import type { ExtendPropType } from '../type'
 
 import { utcFormat } from '@/utils/format'
 import { Button, Flex, Popconfirm, Tag } from 'antd'
-export type TbType = 'utcTimer' | 'button' | 'tag'
+export type TbType = 'utcTimer' | 'button' | 'tag' | 'cover'
+import { Image } from 'antd'
 // import { Button } from 'antd'
 export const extendProps: ExtendPropType[] = [
+  {
+    type: 'cover',
+    render: (src: string) => {
+      return <Image width={140} src={src} />
+    }
+  },
   {
     type: 'utcTimer',
     render: (time: string) => {
