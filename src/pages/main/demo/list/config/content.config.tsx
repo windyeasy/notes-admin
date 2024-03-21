@@ -11,8 +11,8 @@ export const contentConfig: ContentConfig = {
     }
   ],
   headerInfo: {
-    title: '标题列表',
-    btnText: '标题添加'
+    title: 'demo列表',
+    btnText: 'demo添加'
   },
 
   tableConfig: {
@@ -55,7 +55,6 @@ export const contentConfig: ContentConfig = {
       newTitle: 'demo添加',
       editTitle: 'demo编辑'
     },
-
     uiConfig: {
       colConfig: { span: 24 },
       formConfig: {
@@ -72,11 +71,18 @@ export const contentConfig: ContentConfig = {
         rules: [{ required: true, message: '请输入标题' }]
       },
       {
+        type: 'upload-file',
+        prop: 'fileId',
+        label: '封面',
+        uploadProps: {
+          listType: 'picture-card'
+        }
+      },
+      {
         type: 'input',
         label: '跳转链接',
         prop: 'link',
-        placeholder: '请输入跳转链接',
-        rules: [{ required: true, message: '请输入跳转链接' }]
+        placeholder: '请输入跳转链接'
       },
       {
         type: 'textarea',

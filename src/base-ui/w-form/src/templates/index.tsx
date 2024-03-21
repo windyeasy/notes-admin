@@ -316,7 +316,7 @@ export const extendFormItems: NewExtendFormItem[] = [
           wrapperCol={item.wrapperCol}
           rules={item.rules}
         >
-          <UploadFile />
+          <UploadFile uploadProps={item.uploadProps} />
         </Form.Item>
       )
     }

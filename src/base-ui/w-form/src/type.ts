@@ -3,6 +3,7 @@ import type { Rule } from 'antd/es/form'
 import type { ReactNode } from 'react'
 import { WFormProxyService } from './service/proxy-service'
 import { TypeToRenderReturnType } from './utils/utils'
+import type { UploadProps } from 'antd'
 type AnyObject = {
   [index: string]: any
 }
@@ -49,6 +50,7 @@ export interface WFormItem<T = string> {
   followFieldsChangeModifyValue?: FollowFieldsChangeModifyValueType[]
   // 设置高度
   height?: string | number
+  uploadProps?: UploadProps
   [key: string]: any // 添加使用别的类型进行扩展
 }
 
