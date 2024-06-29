@@ -49,9 +49,19 @@ export function uploadFile(file: UploadFileConfig['file']) {
   })
 }
 
+// 编辑密码
 export function editUserPassword(id: number, payload: { password: string }) {
   return request.patch({
     url: `/user/modify-password/${id}`,
     data: payload
+  })
+}
+// 获取图片
+export function getFileInfos(ids: string) {
+  return request.get({
+    url: `/file/files`,
+    params: {
+      ids
+    }
   })
 }

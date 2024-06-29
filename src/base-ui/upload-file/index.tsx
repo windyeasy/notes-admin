@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import { Button, Modal, Upload } from 'antd'
-import { uploadFile } from '@/services/main/system'
+import { getFileInfos, uploadFile } from '@/services/main/system'
 import { useMessageApi } from '@/utils/global-ant-proxy'
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons'
 import type { FC, ReactNode } from 'react'
@@ -12,7 +12,6 @@ interface IProps {
   children?: ReactNode
   uploadProps?: UploadProps
   value?: string
-  fileList?: UploadProps['fileList']
   onChange?: (payload: number | string) => void
 }
 const getBase64 = (file: FileType): Promise<string> => {
@@ -48,9 +47,24 @@ const UploadFile: FC<IProps> = (props) => {
   const {
     uploadProps = {
       maxCount: 1
-    }
+    },
+    value = ''
   } = props
-
+  // 通过接口获取图片列表
+  const getFileListByApi = () => {
+    if (value) {
+      getFileInfos(value).then((res) => {
+        const { data } = res
+        const newFileList: UploadProps['fileList'] = data.map((item: any) => ({
+          url: item.url,
+          name: item.filename,
+          status: 'done',
+          uid: item.id
+        }))
+        setFileList(newFileList)
+      })
+    }
+  }
   // 自定义文件上传请求
   const uploadFileRequest: UploadProps['customRequest'] = async (options) => {
     const file = options.file as any
@@ -67,8 +81,8 @@ const UploadFile: FC<IProps> = (props) => {
         if (code === 0) {
           fileInfo.status = 'done'
           fileInfo.url = data.path
+          fileInfo.uid = data.id
           useMessageApi()?.success('文件上传成功')
-          props.onChange && props.onChange(data.id)
         } else {
           fileInfo.status = 'error'
         }
@@ -76,7 +90,10 @@ const UploadFile: FC<IProps> = (props) => {
         console.log(error)
         fileInfo.status = 'error'
       }
-      setFileList([fileInfo])
+      const newFileList = [...fileList]
+      newFileList.push(fileInfo)
+      props.onChange && props.onChange(newFileList.map((item) => item.uid).join(','))
+      setFileList(newFileList)
     }
   }
 
@@ -96,10 +113,10 @@ const UploadFile: FC<IProps> = (props) => {
 
   // 监听fileList的变化修改fileList的值
   useEffect(() => {
-    if (props.fileList && props.fileList.length) {
-      setFileList(props.fileList)
+    if (props.value) {
+      getFileListByApi()
     }
-  }, [props.fileList])
+  }, [props.value])
 
   return (
     <>

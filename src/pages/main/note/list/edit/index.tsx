@@ -3,7 +3,7 @@ import type { FC, ReactNode } from 'react'
 import { EditWrapper } from './style'
 import { Button, Card, Col, Form, Input, Row, Select, Switch } from 'antd'
 import UploadFile from '@/base-ui/upload-file'
-import type { UploadFile as UploadFileType } from 'antd'
+
 import MDEditor from '@uiw/react-md-editor'
 import { useNavigate, useParams } from 'react-router-dom'
 import { editArticle, fetchArticleDetail } from '../service'
@@ -20,7 +20,7 @@ const NoteEdit: FC<IProps> = () => {
   // 通过菜单类型，隐藏对应的操作框
   const [type, setType] = useState(1)
   // 文件回显
-  const [fileList, setFileList] = useState<UploadFileType[]>([])
+
   const initialValues = {
     title: '',
     type: 1,
@@ -35,17 +35,6 @@ const NoteEdit: FC<IProps> = () => {
         // 处理数据
         const keys = ['title', 'type', 'state', 'fileId', 'content']
         const info: any = {}
-        // 处理文件信息
-        if (data.fileInfo && data.fileInfo.id) {
-          const { fileInfo } = data
-          setFileList([
-            {
-              uid: fileInfo.id,
-              status: 'done',
-              name: fileInfo.filename
-            }
-          ])
-        }
         keys.forEach((key) => {
           info[key] = data[key] ?? ''
           if (key === 'type') {
@@ -135,7 +124,7 @@ const NoteEdit: FC<IProps> = () => {
                   label="内容文件"
                   name="fileId"
                 >
-                  <UploadFile fileList={fileList} />
+                  <UploadFile />
                 </Form.Item>
               </Col>
             )}

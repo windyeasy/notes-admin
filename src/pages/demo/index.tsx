@@ -14,7 +14,6 @@ const Demo: FC<IProps> = () => {
         onChange={(value) => {
           console.log(value)
         }}
-        fileList={[{ uid: 'test', status: 'done', name: 'test.png' }]}
       />
     </DemoWrapper>
   )
