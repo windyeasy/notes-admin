@@ -110,7 +110,9 @@ const UploadFile: FC<IProps> = (props) => {
     setPreviewOpen(true)
     setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf('/') + 1))
   }
-
+  // 处理文件改变
+  const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
+    setFileList(newFileList)
   // 监听fileList的变化修改fileList的值
   useEffect(() => {
     if (props.value) {
@@ -125,6 +127,7 @@ const UploadFile: FC<IProps> = (props) => {
         fileList={fileList}
         customRequest={uploadFileRequest}
         onPreview={handlePreview}
+        onChange={handleChange}
       >
         {fileList.length >= maxCount ? null : showUploadButton(uploadProps.listType)}
       </Upload>
